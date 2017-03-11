@@ -9,6 +9,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+    @Html.ActionLink("Many To Many View", "ManyToMany")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -56,32 +59,5 @@
 </table>
 
 
-<h2>Genre-Album Summary</h2>
-<table class="table">
 
-    <tr>
-        <th></th>
-        @foreach (var genre in ViewBag.Genres)
-        {
-            <th>
-                @genre
-            </th>
-        }
-
-    </tr>
-
-    @foreach(var artist in Model.Select(m => m.Artist).Distinct())
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => artist.ArtistName)
-            </td>
-            <td>
-                @foreach( var album in Model.Where(m => m.ArtistID == artist.ArtistID && m.Genres.Contains()
-            </td>
-        </tr>
-    }
-
-
-</table>
 

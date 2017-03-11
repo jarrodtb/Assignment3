@@ -1,0 +1,78 @@
+﻿@model Assignment3.ViewModels.AAGViewModel
+
+@{
+    ViewBag.Title = "ManyToMany";
+}
+
+<h2>Many To Many</h2>
+
+<table class="table">
+
+    <tr>
+        <th>Artist Name</th>
+        @foreach (var genre in Model.Genres)
+        {
+            <th>
+                @genre.GenreName
+            </th>
+        }
+
+    </tr>
+
+    @foreach(var artist in Model.Artists)
+    {
+        <tr>
+            <td>
+                @artist.ArtistName
+            </td>
+            <td>
+                @foreach (var album in Model.Albums)
+                {
+                    if (album.ArtistID == artist.ArtistID)
+                    {
+                        foreach(var genre in album.Genres)
+                        {
+                            if (genre.GenreName == "Hip Hop")
+                            {
+                                @album.AlbumName
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var album in Model.Albums)
+                {
+                    if (album.ArtistID == artist.ArtistID)
+                    {
+                        foreach (var genre in album.Genres)
+                        {
+                            if (genre.GenreName == "Rock")
+                            {
+                                @album.AlbumName
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var album in Model.Albums)
+                {
+                    if (album.ArtistID == artist.ArtistID)
+                    {
+                        foreach (var genre in album.Genres)
+                        {
+                            if (genre.GenreName == "Metal")
+                            {
+                                @album.AlbumName
+                            }
+                        }
+                    }
+                }
+            </td>
+
+        </tr>
+    }
+
+
+</table>

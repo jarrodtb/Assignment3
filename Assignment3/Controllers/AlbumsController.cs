@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Assignment3.Models;
 using Assignment3.ViewModels;
@@ -19,16 +17,25 @@ namespace Assignment3.Controllers
         // GET: Albums
         public ActionResult Index()
         {
-            //new
+            var albums = db.Albums.Include(a => a.Artist).Include(g => g.Genres);
+            return View(albums.ToList());
+        }
+
+        public ActionResult ManyToMany()
+        {
             var allGenres = db.Genres;
             ViewBag.Genres = new List<string>();
-            foreach(var genre in allGenres)
+            foreach (var genre in allGenres)
             {
                 ViewBag.Genres.Add(genre.GenreName);
             }
-            //end new
-            var albums = db.Albums.Include(a => a.Artist).Include(g => g.Genres);
-            return View(albums.ToList());
+
+            var ViewModel = new AAGViewModel();
+            ViewModel.Albums = db.Albums;
+            ViewModel.Artists = db.Artists;
+            ViewModel.Genres = db.Genres;
+
+            return View(ViewModel);
         }
 
         // GET: Albums/Details/5
